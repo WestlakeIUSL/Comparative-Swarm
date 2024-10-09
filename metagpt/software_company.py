@@ -9,8 +9,8 @@ import typer
 from metagpt.const import CONFIG_ROOT
 from metagpt.utils.project_repo import ProjectRepo
 
-app = typer.Typer(add_completion=False, pretty_exceptions_show_locals=False)
 
+from swarm_prompt.prompt_swarm_robot import UserRequirement, task_name
 
 def generate_repo(
     idea,
@@ -148,6 +148,7 @@ def copy_config_to():
     target_path.write_text(DEFAULT_CONFIG, encoding="utf-8")
     print(f"Configuration file initialized at {target_path}")
 
+app = typer.Typer(add_completion=False, pretty_exceptions_show_locals=False)
 
 if __name__ == "__main__":
     app()

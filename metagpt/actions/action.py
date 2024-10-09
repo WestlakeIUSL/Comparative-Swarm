@@ -23,6 +23,7 @@ from metagpt.schema import (
     TestingContext,
 )
 from metagpt.utils.project_repo import ProjectRepo
+from swarm_prompt.prompt_swarm_robot import swarm_system_prompt
 
 
 class Action(SerializationMixin, ContextMixin, BaseModel):
@@ -76,8 +77,8 @@ class Action(SerializationMixin, ContextMixin, BaseModel):
 
     def set_prefix(self, prefix):
         """Set prefix for later usage"""
-        self.prefix = prefix
-        self.llm.system_prompt = prefix
+        self.prefix = prefix + swarm_system_prompt
+        self.llm.system_prompt = self.prefix
         if self.node:
             self.node.llm = self.llm
         return self
