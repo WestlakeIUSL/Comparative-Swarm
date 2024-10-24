@@ -12,6 +12,9 @@ from metagpt.utils.project_repo import ProjectRepo
 
 from swarm_prompt.prompt_swarm_robot import UserRequirement, task_name
 
+
+app = typer.Typer(add_completion=False, pretty_exceptions_show_locals=False)
+
 def generate_repo(
     idea,
     investment=3.0,
@@ -73,7 +76,7 @@ def generate_repo(
 
 @app.command("", help="Start a new project.")
 def startup(
-    idea: str = typer.Argument(None, help="Your innovative idea, such as 'Create a 2048 game.'"),
+    idea: str = typer.Argument(UserRequirement, help="Your innovative idea, such as 'Create a 2048 game.'"),
     investment: float = typer.Option(default=3.0, help="Dollar amount to invest in the AI company."),
     n_round: int = typer.Option(default=5, help="Number of rounds for the simulation."),
     code_review: bool = typer.Option(default=True, help="Whether to use code review."),
@@ -148,7 +151,6 @@ def copy_config_to():
     target_path.write_text(DEFAULT_CONFIG, encoding="utf-8")
     print(f"Configuration file initialized at {target_path}")
 
-app = typer.Typer(add_completion=False, pretty_exceptions_show_locals=False)
 
 if __name__ == "__main__":
     app()
