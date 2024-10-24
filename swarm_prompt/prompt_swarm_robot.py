@@ -1,7 +1,8 @@
 import os
 import yaml
 
-from swarm_prompt.robot_api_prompt import robot_api
+
+from swarm_prompt.robot_api_prompt import GLOBAL_ROBOT_API, LOCAL_ROBOT_API
 from swarm_prompt.user_requirements import get_user_commands
 from swarm_prompt.env_description_prompt import ENV_DES
 from swarm_prompt.task_description import TASK_DES
@@ -21,15 +22,21 @@ These are the basic descriptions of the environment.
 {ENV_DES}
 
 ## These APIs can be directly called by you.
-```python
-{robot_api.get_prompt(task_name)}
-```
+where local APIs can only be called by the robot itself, and global APIs can be called by an centralized controller.
+Local APIs:
+{LOCAL_ROBOT_API}
+Global APIs:
+{GLOBAL_ROBOT_API}
+
 
 ## Interface Constraints:
 The function in main.py must be def main()
 And you cannot use ros.
 You don't need to design UI.
+The global APIs can only called in task_allocator;
+The local APIs can only called in robot_controller;
 """
+
 
 swarm_system_prompt_GPT = f"""
 {TASK_DES}
@@ -38,9 +45,6 @@ swarm_system_prompt_GPT = f"""
 These are the basic descriptions of the environment.
 {ENV_DES}
 
-## These APIs can be directly called by you.
-```python
-{robot_api.get_prompt(task_name)}
 ```
 
 ## Interface Constraints:
