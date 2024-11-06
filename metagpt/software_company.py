@@ -3,8 +3,10 @@
 
 import asyncio
 from pathlib import Path
+from datetime import datetime
 
 import typer
+import random
 
 from metagpt.const import CONFIG_ROOT
 from metagpt.utils.project_repo import ProjectRepo
@@ -82,7 +84,7 @@ def startup(
     code_review: bool = typer.Option(default=True, help="Whether to use code review."),
     run_tests: bool = typer.Option(default=False, help="Whether to enable QA for adding & running tests."),
     implement: bool = typer.Option(default=True, help="Enable or disable code implementation."),
-    project_name: str = typer.Option(default="", help="Unique project name, such as 'game_2048'."),
+    project_name: str = typer.Option(default=f"{task_name}_{datetime.now().strftime('%Y%m%d_%H%M%S.%f')[:-3]}_{random.randint(1000000, 9999999)}", help="Unique project name."),
     inc: bool = typer.Option(default=False, help="Incremental mode. Use it to coop with existing repo."),
     project_path: str = typer.Option(
         default="",
