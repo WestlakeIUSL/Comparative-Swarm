@@ -108,10 +108,10 @@ class OpenAILLM(BaseLLM):
     def _cons_kwargs(self, messages: list[dict], timeout=USE_CONFIG_TIMEOUT, **extra_kwargs) -> dict:
         kwargs = {
             "messages": messages,
-            "max_tokens": self._get_max_tokens(messages),
+            # "max_tokens": self._get_max_tokens(messages),  # openai o1-mini 不可以使用这个参数
             # "n": 1,  # Some services do not provide this parameter, such as mistral
             # "stop": None,  # default it's None and gpt4-v can't have this one
-            "temperature": self.config.temperature,
+            # "temperature": self.config.temperature,
             "model": self.model,
             "timeout": self.get_timeout(timeout),
         }
