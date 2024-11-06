@@ -9,8 +9,19 @@ arguments:
     default: 1
     help: special for generate_code mode to specify the experiment nums
   --run_experiment_name:
-    default: [ 'exploration' ]
+    default: [ 'bridging' ]
     help: for run_experiment mode and generate_code mode to specify the experiment name
+  # choose from :
+      #bridging
+      #circling
+      #covering
+      #crossing
+      #encircling
+      #exploration
+      #flocking
+      #clustering
+      #shaping
+      #pursuing
   --run_times:
     default: 60
     help: simulation times when run_test mode
