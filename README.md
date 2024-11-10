@@ -8,32 +8,51 @@
 
 ## 文件夹说明
 
-- CaP: 存储了用于对比试验的CaP的代码(暂时还没加入)
-- GPT4: 存储了用于做对比试验的GPT的代码
+- CaP: 存储了用于对比试验的CaP的代码
 - metagpt: 存储了做对比试验的MetaGPT的主体代码
-- config: 用于配置集群任务, LLM的api信息
+- config: 用于配置集群任务的task ， 配置LLM的代理网址、api token
 - swarm_prompt: 存储了集群任务的全部提示词
-- workspace: 内部将会有CaP, GPT4, metagpt三个子文件夹, 分别存储各自的对比试验生成的代码
-- requirements.txt: 依赖包
+- workspace: 内部将会有CaP, metagpt三个子文件夹, 分别存储各自的对比试验生成的代码
+- requirements.txt: MetaGPT的依赖包（和CaP需要的不一样）
 - 根目录下其他文件夹和文件: 均为metagpt的自带文件, 不必关注
 
 ## 环境说明
 
-python =3.10
+
+
+建议python =3.10
+
+#### MetaGPT对比试验：
 
 ```
-conda create -n comparative_codellm_py310 python=3.10
+conda create -n comparative_metagpt_py310 python=3.10
 ```
 
 ```
-conda activate comparative_codellm_py310
+conda activate comparative_metagpt_py310
 ```
 
 ```
 pip install -r requirements.txt
 ```
 
-## 如何运行
+#### CaP对比试验：
+
+``` 
+conda create -n comparative_cap_py310 python=3.10
+```
+
+```
+conda activate comparative_cap_py310
+```
+
+```
+pip install -r CaP/requirements.txt
+```
+
+
+
+## 运行
 
 ### metagpt
 
@@ -45,9 +64,32 @@ pip install -r requirements.txt
 - metagpt/software_company.py: 这里在startup()函数的idea中输入集群任务指令 user_requirements
 - metagpt/acions/action.py: 在这里set_prefix()函数中 设置system_prompt, 输入集群环境描述/机器人API等要求
 
-使用安装好依赖的python环境直接运行multi_run.py即可在workspace中得到对应的集群控制代码
+使用安装好依赖的python环境直接运行`metagpt/multi_run_metagpt.py`即可在workspace中得到对应的集群控制代码
 
-***
+```
+conda activate comparative_metagpt_py310
+python metagpt/multi_run_metagpt.py
+```
+
+
+
+### **CaP**
+
+​	CaP的关键文件有这几个：
+
+- Interactive_Demo.py： 运行一次对比试验的文件
+- multi_run_cap.py： 多次运行Interactive_Demo.py
+- prompt_swarm_robot.py： 提示词管理
+
+使用安装好依赖的python运行`CaP/multi_run_cap.py`即可在workspace的CaP文件夹得到对应的代码
+
+```
+conda activate comparative_cap_py310
+```
+
+```
+python CaP/multi_run_cap.py
+```
 
 
 
