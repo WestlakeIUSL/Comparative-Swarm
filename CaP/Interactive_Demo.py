@@ -109,7 +109,7 @@ class LMP:
                     model=self._cfg['engine'],
                     messages=[{"role": "user", "content": prompt}],
                     # max_tokens=self._cfg['max_tokens'],
-                    # temperature=self._cfg['temperature'],  #  temperature' does not support 0 with o1 mini model.
+                    temperature=self._cfg['temperature'],  #  o1 mini model: Only the default (1) value is supported..
                 ).choices[0].message.content.strip()
 
                 code_str = ''
@@ -151,8 +151,8 @@ class LMP:
         #     return lvars[self._cfg['return_val_name']]
         from datetime import datetime
         import random
-        workspace_dir = f'../workspace/CaP/{task_name}'
-        file_path = os.path.join(workspace_dir, f"{task_name}_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')[:-3]}_{random.randint(1000000, 9999999)}.py")
+        workspace_dir = f"../workspace/CaP/{task_name}/{task_name}_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')[:-3]}_{random.randint(1000000, 9999999)}"
+        file_path = os.path.join(workspace_dir, f"main.py")
         os.makedirs(workspace_dir, exist_ok=True)
         with open(file_path, 'w') as file:
             file.write(code_str)
@@ -663,7 +663,7 @@ cfg_tabletop = {
       'prompt_text': prompt_tabletop_ui,
       'engine': model_name,
       'max_tokens': 10000,
-      'temperature': 0,
+      'temperature': 1,
       'query_prefix': '# ',
       'query_suffix': '.',
       'stop': ['#', 'objects = ['],
