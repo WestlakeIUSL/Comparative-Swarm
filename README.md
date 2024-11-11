@@ -62,8 +62,8 @@ pip install -r CaP/requirements.txt
 - config/experiment_config.yaml: 这里设置集群任务 task_name
 - metagpt/multi_run.py: 主函数入口, 可以设置运行几次softward_company.py文件, 也就生成几份代码
 - metagpt/software_company.py: 这里在startup()函数的idea中输入集群任务指令 user_requirements
-- metagpt/acions/action.py: 在这里set_prefix()函数中 设置system_prompt, 输入集群环境描述/机器人API等要求
-
+- metagpt/actions/action.py: 在这里set_prefix()函数中 设置system_prompt, 输入集群环境描述/机器人API等要求
+- metagpt/provider/base_llm.py： 这里根据o1mini没有system prompt的特性，把system prompt直接和task requirement合并在一个str里
 使用安装好依赖的python环境直接运行`metagpt/multi_run_metagpt.py`即可在workspace中得到对应的集群控制代码
 
 ```

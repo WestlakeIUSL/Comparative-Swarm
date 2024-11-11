@@ -77,6 +77,7 @@ class Action(SerializationMixin, ContextMixin, BaseModel):
 
     def set_prefix(self, prefix):
         """Set prefix for later usage"""
+        # 这里是system prompt加入的地方
         self.prefix = prefix + swarm_system_prompt
         self.llm.system_prompt = self.prefix
         if self.node:

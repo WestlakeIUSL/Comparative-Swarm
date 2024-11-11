@@ -138,8 +138,8 @@ class BaseLLM(ABC):
         if system_msgs:
             message = self._system_msgs(system_msgs)
         else:
-            # 因为模型是gpt-o1mini，所以不可以用system prompt
             # message = [self._default_system_msg()]
+            # 因为模型是gpt-o1mini，所以不可以用system prompt，所以需要直接和task requirement直接合并起来
             message = []
             if self._default_system_msg()['content'] in msg:
                 print("system already in content")
