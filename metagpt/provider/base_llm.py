@@ -132,19 +132,22 @@ class BaseLLM(ABC):
         format_msgs: Optional[list[dict[str, str]]] = None,
         images: Optional[Union[str, list[str]]] = None,
         timeout=USE_CONFIG_TIMEOUT,
-        stream=False,
+        stream=True,
     ) -> str:
 
         if system_msgs:
             message = self._system_msgs(system_msgs)
         else:
-            # message = [self._default_system_msg()]
-            # 因为模型是gpt-o1mini，所以不可以用system prompt，所以需要直接和task requirement直接合并起来
-            message = []
-            if self._default_system_msg()['content'] in msg:
-                print("system already in content")
-            else:
-                msg = self._default_system_msg()['content'] + msg
+            message = [self._default_system_msg()]
+
+            ## 如果模型是gpt-o1mini，所以不可以用system prompt，所以需要直接和task requirement直接合并起来，并且不可以有stream
+            # stream = False
+            # message = []
+            # if self._default_system_msg()['content'] in msg:
+            #     print("system already in content")
+            # else:
+            #     msg = self._default_system_msg()['content'] + msg
+
         if not self.use_system_prompt:
             message = []
         if format_msgs:
