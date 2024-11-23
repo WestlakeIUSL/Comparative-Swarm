@@ -10,7 +10,6 @@ llm:
 #  api_key: 'sk-uKFunE6kCNT7GuMwvdT2WXUxjpEVSxN8o8ynsONw6HSoAA2A'
   api_key: 'sk-tT8XYVZUo5PZZsg1ppMNHOcJt0hZL59HSxI8B79VQSw6Wh7t'  # 1
 #  api_key: 'sk-r9qfdF2lYiKx46j9d0UCzhrsDchgOcmq885KKr71pppkcxdm'  # TEST
-  model: 'o1-mini'
+  model: 'gpt-4o'
   base_url: "https://vip.dmxapi.com/v1"
-  use_system_prompt: false
-  stream: false
+
